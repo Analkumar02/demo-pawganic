@@ -273,6 +273,9 @@ p {
     }
 }
 
+
+/*----------Product Box----------*/
+
 .product-box {
     margin-bottom: 20px;
     .product-img {
@@ -367,4 +370,38 @@ p {
 
 .pr-divider {
     border-bottom: 2px solid #EEEEEE;
+}
+
+@media (max-width: 991px) {
+    .product-box {
+        margin-bottom: 20px;
+        .product-img {
+            .add-to-cart {
+                .btn {
+                    font-size: 14px;
+                    img {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .product-box {
+        margin-bottom: 20px;
+        .product-img {
+            .add-to-cart {
+                .btn {
+                    max-width: 300px;
+                    font-size: 12px;
+                    width: 150px;
+                    img {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
 }
