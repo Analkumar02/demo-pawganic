@@ -33,7 +33,7 @@
 }
 
 .pr-desc-area {
-    padding: 100px 0 80px;
+    padding: 100px 0 30px;
     .single-img-box {
         .swiper {
             width: 100%;
@@ -249,6 +249,53 @@
                 }
             }
         }
+    }
+}
+
+
+/* Feature Product Section */
+
+.related-product-area {
+    padding: 40px 0 80px;
+    .heading {
+        font-size: 30px;
+        margin-bottom: 35px;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            background-image: url(../images/heading-paw.svg);
+            height: 18px;
+            width: 19px;
+            top: -10px;
+        }
+    }
+    .related-pr-slider {
+        overflow-x: hidden;
+        .pr-slider-btn {
+            opacity: 0;
+            transition: .4s ease-in-out;
+            top: 35%;
+            &::after {
+                font-size: 25px;
+                padding: 12px 18px;
+                color: var(--theme-secondary);
+                background-color: var(--theme-primary);
+                border-radius: 50%;
+            }
+        }
+        &:hover {
+            .pr-slider-btn {
+                opacity: 1;
+                transform: translatex(-10px);
+            }
+        }
+    }
+    .pr-slider-prev {
+        left: 25px;
+    }
+    .pr-slider-next {
+        right: 5px;
     }
 }
 

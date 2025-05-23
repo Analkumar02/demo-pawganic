@@ -1,7 +1,8 @@
-// Menu btn
+/*----------Header----------*/
 document.addEventListener("click", function (event) {
   const navMenu = document.querySelector(".nav-menu");
   const menuBtn = document.getElementById("menu-btn");
+
   const isClickInsideMenu = navMenu.contains(event.target);
   const isClickOnMenuBtn = menuBtn.contains(event.target);
 
@@ -19,32 +20,31 @@ document.getElementById("menu-btn").addEventListener("click", function (e) {
   document.querySelector(".nav-menu").classList.toggle("active");
 });
 
-// Sticky Navbar
-window.onscroll = function () {
-  myFunction();
-};
+const header = document.getElementById("header");
+const stickyOffset = header.offsetTop;
 
-var header = document.getElementById("header");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
+window.addEventListener("scroll", function () {
+  if (window.pageYOffset > stickyOffset) {
     header.classList.add("sticky");
   } else {
     header.classList.remove("sticky");
   }
-}
+});
 
-//Hero Slider
-document.querySelectorAll(".slider-bg").forEach(function (el) {
-  var bg = el.getAttribute("data-background");
-  if (bg) el.style.backgroundImage = "url(" + bg + ")";
+/*----------Header----------*/
+
+/*----------Hero slider----------*/
+document.querySelectorAll(".slider-bg").forEach((el) => {
+  const bg = el.getAttribute("data-background");
+  if (bg) {
+    el.style.backgroundImage = `url(${bg})`;
+  }
 });
 
 const progressCircle = document.querySelector(".autoplay-progress svg");
 const progressContent = document.querySelector(".autoplay-progress span");
 
-var swiper = new Swiper(".hero-slider", {
+const swiper = new Swiper(".hero-slider", {
   spaceBetween: 30,
   effect: "fade",
   fadeEffect: {
@@ -57,11 +57,13 @@ var swiper = new Swiper(".hero-slider", {
   },
   speed: 1000,
   on: {
-    autoplayTimeLeft(s, time, progress) {
+    autoplayTimeLeft(swiperInstance, time, progress) {
       progressCircle.style.setProperty("--progress", 1 - progress);
     },
   },
 });
+
+/*----------Hero slider----------*/
 
 $(document).ready(function () {
   /*----------Cart Count----------*/
@@ -84,6 +86,7 @@ $(document).ready(function () {
   }
 
   updateCartCount();
+  /*----------Cart Count----------*/
 
   /*----------Wishlist Count----------*/
 
@@ -104,6 +107,7 @@ $(document).ready(function () {
   }
 
   updateWishlistCount();
+  /*----------Wishlist Count----------*/
 
   /*----------Add to wishlist----------*/
 
@@ -125,6 +129,7 @@ $(document).ready(function () {
       alert("Already in wishlist");
     }
   });
+  /*----------Add to wishlist----------*/
 
   /*----------Add to cart----------*/
 
@@ -147,6 +152,7 @@ $(document).ready(function () {
     saveCart(cart);
     updateCartCount();
   });
+  /*----------Add to cart----------*/
 
   /*----------Search Box----------*/
   const $searchForm = $(".search-form");
@@ -218,6 +224,7 @@ $(document).ready(function () {
       $suggestionsBox.hide();
     }
   });
+  /*----------Search Box----------*/
 
   /*----------Featured Products Carousel----------*/
 
@@ -300,6 +307,7 @@ $(document).ready(function () {
       },
     });
   });
+  /*----------Featured Products Carousel----------*/
 
   /*----------Trending Products----------*/
 
@@ -619,4 +627,77 @@ $(document).ready(function () {
       input.val(currentVal - 1);
     }
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+
+  if (productId) {
+    $.getJSON("data/products.json", function (data) {
+      const product = data.products.find((p) => p.id === productId);
+      if (!product) return;
+
+      const relatedProducts = data.products.filter((p) => p.id !== productId);
+      const relatedHtml = relatedProducts
+        .map(
+          (item) => `
+  <div class="swiper-slide">
+    <div class="product-box">
+      <div class="product-img position-relative">
+        <img class="pr-img" src="${item.images[0]}" alt="${item.name}">
+        <div class="add-to-cart">
+          <a href="#" class="btn add-to-cart-btn"
+             data-id="${item.id}"
+             data-name="${item.name}"
+             data-price="${item.offerPrice}"
+             data-img="${item.images[0]}">
+            <img src="images/cart-white.svg" alt="cart"> add to cart
+          </a>
+        </div>
+        <div class="wishlist-box">
+          <a href="#" class="add-to-wishlist-btn"
+             data-id="${item.id}"
+             data-name="${item.name}"
+             data-img="${item.images[0]}"
+             data-price="${item.offerPrice}">
+            <i class="bx bx-heart"></i>
+          </a>
+        </div>
+      </div>
+      <div class="product-info">
+        <a class="pr-title" href="product-desc.html?id=${item.id}">
+          <p>${item.name.split(" ").slice(0, 7).join(" ")}${
+            item.name.split(" ").length > 7 ? "..." : ""
+          }</p>
+        </a>
+        <div class="pr-price">
+          <div class="offer-price">$${item.offerPrice.toFixed(2)}</div>
+          <div class="org-price"><strike>$${item.originalPrice.toFixed(
+            2
+          )}</strike></div>
+        </div>
+      </div>
+    </div>
+  </div>
+`
+        )
+        .join("");
+
+      $("#related-products-wrapper").html(relatedHtml);
+
+      new Swiper(".related-pr-slider", {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: ".pr-slider-next",
+          prevEl: ".pr-slider-prev",
+        },
+        breakpoints: {
+          576: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          992: { slidesPerView: 4 },
+          1200: { slidesPerView: 5 },
+        },
+      });
+    });
+  }
 });

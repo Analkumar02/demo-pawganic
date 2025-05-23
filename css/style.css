@@ -1568,7 +1568,7 @@ p {
 }
 
 .pr-desc-area {
-  padding: 100px 0 80px;
+  padding: 100px 0 30px;
 }
 .pr-desc-area .single-img-box .swiper {
   width: 100%;
@@ -1778,6 +1778,49 @@ p {
 }
 .pr-desc-area .custom-tabs .tab-content .benefit-list li {
   list-style: disc;
+}
+
+/* Feature Product Section */
+.related-product-area {
+  padding: 40px 0 80px;
+}
+.related-product-area .heading {
+  font-size: 30px;
+  margin-bottom: 35px;
+  position: relative;
+}
+.related-product-area .heading::after {
+  content: "";
+  position: absolute;
+  background-image: url(../images/heading-paw.svg);
+  height: 18px;
+  width: 19px;
+  top: -10px;
+}
+.related-product-area .related-pr-slider {
+  overflow-x: hidden;
+}
+.related-product-area .related-pr-slider .pr-slider-btn {
+  opacity: 0;
+  transition: 0.4s ease-in-out;
+  top: 35%;
+}
+.related-product-area .related-pr-slider .pr-slider-btn::after {
+  font-size: 25px;
+  padding: 12px 18px;
+  color: var(--theme-secondary);
+  background-color: var(--theme-primary);
+  border-radius: 50%;
+}
+.related-product-area .related-pr-slider:hover .pr-slider-btn {
+  opacity: 1;
+  transform: translatex(-10px);
+}
+.related-product-area .pr-slider-prev {
+  left: 25px;
+}
+.related-product-area .pr-slider-next {
+  right: 5px;
 }
 
 @media (max-width: 991px) {
