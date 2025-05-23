@@ -1683,7 +1683,9 @@ p {
   background: transparent;
   font-size: 16px;
   color: #333;
-  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
   line-height: 1;
 }
 .pr-desc-area .single-pr-content .cart-box .quantity-box .qty-input::-webkit-outer-spin-button, .pr-desc-area .single-pr-content .cart-box .quantity-box .qty-input::-webkit-inner-spin-button {

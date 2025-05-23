@@ -150,7 +150,7 @@
                     background: transparent;
                     font-size: 16px;
                     color: #333;
-                    -moz-appearance: textfield;
+                    appearance: textfield;
                     line-height: 1;
                     &::-webkit-outer-spin-button,
                     &::-webkit-inner-spin-button {
