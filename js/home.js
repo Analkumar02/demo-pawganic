@@ -1,50 +1,50 @@
 /*----------Hero slider----------*/
 document.querySelectorAll(".slider-bg").forEach((el) => {
-  const bg = el.getAttribute("data-background");
-  if (bg) {
-    el.style.backgroundImage = `url(${bg})`;
-  }
+    const bg = el.getAttribute("data-background");
+    if (bg) {
+        el.style.backgroundImage = `url(${bg})`;
+    }
 });
 
 const progressCircle = document.querySelector(".autoplay-progress svg");
 const progressContent = document.querySelector(".autoplay-progress span");
 
 const swiper = new Swiper(".hero-slider", {
-  spaceBetween: 30,
-  effect: "fade",
-  fadeEffect: {
-    crossFade: true,
-  },
-  centeredSlides: true,
-  autoplay: {
-    delay: 7000,
-    disableOnInteraction: false,
-  },
-  speed: 1000,
-  on: {
-    autoplayTimeLeft(swiperInstance, time, progress) {
-      progressCircle.style.setProperty("--progress", 1 - progress);
+    spaceBetween: 30,
+    effect: "fade",
+    fadeEffect: {
+        crossFade: true,
     },
-  },
+    centeredSlides: true,
+    autoplay: {
+        delay: 7000,
+        disableOnInteraction: false,
+    },
+    speed: 1000,
+    on: {
+        autoplayTimeLeft(swiperInstance, time, progress) {
+            progressCircle.style.setProperty("--progress", 1 - progress);
+        },
+    },
 });
 
 /*----------Hero slider----------*/
 
-$(document).ready(function () {
-  /*----------Featured Products Carousel----------*/
+$(document).ready(function() {
+    /*----------Featured Products Carousel----------*/
 
-  $.getJSON("data/products.json", function (data) {
-    const featuredProducts = data.products.filter(
-      (product) => product.tags && product.tags.includes("featured")
-    );
+    $.getJSON("data/products.json", function(data) {
+        const featuredProducts = data.products.filter(
+            (product) => product.tags && product.tags.includes("featured")
+        );
 
-    let html = "";
-    featuredProducts.forEach((product) => {
-      const nameWords = product.name.split(" ");
-      const shortName =
-        nameWords.slice(0, 7).join(" ") + (nameWords.length > 7 ? "..." : "");
+        let html = "";
+        featuredProducts.forEach((product) => {
+            const nameWords = product.name.split(" ");
+            const shortName =
+                nameWords.slice(0, 7).join(" ") + (nameWords.length > 7 ? "..." : "");
 
-      html += `
+            html += `
         <div class="swiper-slide product-slide">
             <div class="product-box">
                 <div class="product-img position-relative">
@@ -88,46 +88,46 @@ $(document).ready(function () {
             </div>
         </div>
     `;
+        });
+
+        $("#featured-products-wrapper").html(html);
+
+        new Swiper(".feature-pr-slider", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".pr-slider-next",
+                prevEl: ".pr-slider-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                992: { slidesPerView: 4 },
+                1200: { slidesPerView: 5 },
+            },
+        });
     });
+    /*----------Featured Products Carousel----------*/
 
-    $("#featured-products-wrapper").html(html);
+    /*----------Trending Products----------*/
 
-    new Swiper(".feature-pr-slider", {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".pr-slider-next",
-        prevEl: ".pr-slider-prev",
-      },
-      breakpoints: {
-        576: { slidesPerView: 2 },
-        768: { slidesPerView: 3 },
-        992: { slidesPerView: 4 },
-        1200: { slidesPerView: 5 },
-      },
-    });
-  });
-  /*----------Featured Products Carousel----------*/
+    $.getJSON("data/products.json", function(data) {
+        const trendingProducts = data.products
+            .filter((product) => product.tags && product.tags.includes("trending"))
+            .slice(0, 6);
 
-  /*----------Trending Products----------*/
+        let html = "";
+        trendingProducts.forEach((product) => {
+            const nameWords = product.name.split(" ");
+            const shortName =
+                nameWords.slice(0, 7).join(" ") + (nameWords.length > 7 ? "..." : "");
 
-  $.getJSON("data/products.json", function (data) {
-    const trendingProducts = data.products
-      .filter((product) => product.tags && product.tags.includes("trending"))
-      .slice(0, 6);
-
-    let html = "";
-    trendingProducts.forEach((product) => {
-      const nameWords = product.name.split(" ");
-      const shortName =
-        nameWords.slice(0, 7).join(" ") + (nameWords.length > 7 ? "..." : "");
-
-      html += `
+            html += `
     <div class="col-lg-4 col-md-4 col-sm-6 col-6">
         <div class="product-box">
             <div class="product-img position-relative">
@@ -169,25 +169,25 @@ $(document).ready(function () {
         </div>
     </div>
 `;
+        });
+
+        $("#trending-products-wrapper").html(html);
     });
 
-    $("#trending-products-wrapper").html(html);
-  });
+    /*----------Top Rated Products----------*/
 
-  /*----------Top Rated Products----------*/
+    $.getJSON("data/products.json", function(data) {
+        const topratedProducts = data.products
+            .filter((product) => product.tags && product.tags.includes("top"))
+            .slice(0, 6);
 
-  $.getJSON("data/products.json", function (data) {
-    const topratedProducts = data.products
-      .filter((product) => product.tags && product.tags.includes("top"))
-      .slice(0, 6);
+        let html = "";
+        topratedProducts.forEach((product) => {
+            const nameWords = product.name.split(" ");
+            const shortName =
+                nameWords.slice(0, 7).join(" ") + (nameWords.length > 7 ? "..." : "");
 
-    let html = "";
-    topratedProducts.forEach((product) => {
-      const nameWords = product.name.split(" ");
-      const shortName =
-        nameWords.slice(0, 7).join(" ") + (nameWords.length > 7 ? "..." : "");
-
-      html += `
+            html += `
     <div class="col-lg-4 col-md-4 col-sm-6 col-6">
         <div class="product-box">
             <div class="product-img position-relative">
@@ -229,20 +229,20 @@ $(document).ready(function () {
         </div>
     </div>
 `;
+        });
+
+        $("#toprated-products-wrapper").html(html);
     });
 
-    $("#toprated-products-wrapper").html(html);
-  });
-
-  /*----------Testimonial Carousel----------*/
-  var swiper = new Swiper(".testimonial-slider", {
-    spaceBetween: 30,
-    centeredSlides: true,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-  });
-  /*----------Testimonial Carousel----------*/
+    /*----------Testimonial Carousel----------*/
+    var swiper = new Swiper(".testimonial-slider", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+    });
+    /*----------Testimonial Carousel----------*/
 });

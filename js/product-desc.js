@@ -1,57 +1,57 @@
-$(document).ready(function () {
-  if (window.location.pathname.includes("product-desc.html")) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get("id");
+$(document).ready(function() {
+            if (window.location.pathname.includes("product-desc.html")) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = urlParams.get("id");
 
-    if (productId) {
-      $.getJSON("data/products.json", function (data) {
-        const product = data.products.find((p) => p.id === productId);
-        if (!product) return;
+                if (productId) {
+                    $.getJSON("data/products.json", function(data) {
+                                const product = data.products.find((p) => p.id === productId);
+                                if (!product) return;
 
-        const {
-          name,
-          category,
-          images,
-          offerPrice,
-          originalPrice,
-          shortDesc,
-          description,
-          ingredients,
-          keyBenefits,
-          rating = 0,
-        } = product;
+                                const {
+                                    name,
+                                    category,
+                                    images,
+                                    offerPrice,
+                                    originalPrice,
+                                    shortDesc,
+                                    description,
+                                    ingredients,
+                                    keyBenefits,
+                                    rating = 0,
+                                } = product;
 
-        const imageSlides = images
-          .map(
-            (img) => `<div class="swiper-slide"><img src="${img}" alt=""></div>`
-          )
-          .join("");
+                                const imageSlides = images
+                                    .map(
+                                        (img) => `<div class="swiper-slide"><img src="${img}" alt=""></div>`
+                                    )
+                                    .join("");
 
-        const thumbSlides = images
-          .map(
-            (img) => `<div class="swiper-slide"><img src="${img}" alt=""></div>`
-          )
-          .join("");
+                                const thumbSlides = images
+                                    .map(
+                                        (img) => `<div class="swiper-slide"><img src="${img}" alt=""></div>`
+                                    )
+                                    .join("");
 
-        let tabs = "",
-          tabContents = "";
-        if (description) {
-          tabs += `<li class="nav-item"><button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab">Description</button></li>`;
-          tabContents += `<div class="tab-pane fade show active" id="desc" role="tabpanel"><p>${description}</p></div>`;
-        }
-        if (ingredients) {
-          tabs += `<li class="nav-item"><button class="nav-link ${
+                                let tabs = "",
+                                    tabContents = "";
+                                if (description) {
+                                    tabs += `<li class="nav-item"><button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab">Description</button></li>`;
+                                    tabContents += `<div class="tab-pane fade show active" id="desc" role="tabpanel"><p>${description}</p></div>`;
+                                }
+                                if (ingredients) {
+                                    tabs += `<li class="nav-item"><button class="nav-link ${
             !description ? "active" : ""
           }" id="ingredients-tab" data-bs-toggle="tab" data-bs-target="#ingredients" type="button" role="tab">Ingredients</button></li>`;
-          tabContents += `<div class="tab-pane fade ${
+                                    tabContents += `<div class="tab-pane fade ${
             !description ? "show active" : ""
           }" id="ingredients" role="tabpanel"><p>${ingredients}</p></div>`;
-        }
-        if (keyBenefits) {
-          tabs += `<li class="nav-item"><button class="nav-link ${
+                                }
+                                if (keyBenefits) {
+                                    tabs += `<li class="nav-item"><button class="nav-link ${
             !description && !ingredients ? "active" : ""
           }" id="benefits-tab" data-bs-toggle="tab" data-bs-target="#benefits" type="button" role="tab">Key Benefits</button></li>`;
-          tabContents += `<div class="tab-pane fade ${
+                                    tabContents += `<div class="tab-pane fade ${
             !description && !ingredients ? "show active" : ""
           }" id="benefits" role="tabpanel"><ul class="list-style-disc benefit-list">${keyBenefits
             .map((item) => `<li>${item}</li>`)
@@ -171,19 +171,6 @@ $(document).ready(function () {
       });
     }
   }
-
-  $(document).on("click", ".qty-btn.plus", function () {
-    const input = $(this).siblings(".qty-input");
-    input.val(parseInt(input.val()) + 1);
-  });
-
-  $(document).on("click", ".qty-btn.minus", function () {
-    const input = $(this).siblings(".qty-input");
-    const currentVal = parseInt(input.val());
-    if (currentVal > 1) {
-      input.val(currentVal - 1);
-    }
-  });
 
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");

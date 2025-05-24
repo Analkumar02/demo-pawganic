@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/baloo-bhaina-2" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 
 <body>
@@ -117,6 +117,84 @@
         </div>
     </header>
 
+    <main>
+
+        <!-- Breadcrumb Area -->
+        <section class="breadcrumb-area">
+            <div class="container-xl">
+                <div class="row align-items-center position-relative">
+                    <div class="breadcrumb-box">
+                        <h2>Cart</h2>
+                        <div class="menu-link">
+                            <a href="index.html">Home</a>
+                            <a class="active" href="cart.html">Cart</a>
+                        </div>
+                    </div>
+                    <img class="br-img" src="images/br-img.png" alt="">
+                </div>
+            </div>
+        </section>
+
+
+        <section class="cart-area">
+            <div class="container-xl">
+                <h2>Your cart items</h2>
+                <div class="cart-table table-responsive">
+                    <table class="cart-table table table-bordered rounded-table">
+                        <thead>
+                            <tr>
+                                <th class="img-cell">Product Image</th>
+                                <th class="title-cell">Product Name</th>
+                                <th class="text-cell">Product Price</th>
+                                <th class="text-cell">Quantity</th>
+                                <th class="text-cell">Subtotal</th>
+                                <th class="img-cell">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="cart-btn-box">
+                    <a href="#" class="btn clear-btn">Clear Cart</a>
+                    <a href="checkout.html" class="btn checkout-btn">Proceed to Checkout</a>
+                </div>
+
+
+                <div class=" cart-total-box row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="cart-total">
+                            <h2 class="cart-title">Cart Total</h2>
+
+                            <div class="d-flex align-items-center justify-content-between pr-total">
+                                <p>Total Products</p>
+                                <p class="pr-total-price">$0.00</p>
+                            </div>
+
+                            <div class="pr-divider"></div>
+
+                            <div class="d-flex align-items-center justify-content-between shipping">
+                                <p>Shipping</p>
+                                <p>Free</p>
+                            </div>
+
+                            <div class="pr-divider"></div>
+
+                            <div class="d-flex align-items-center justify-content-between grand-total">
+                                <h2>Grand Total</h2>
+                                <h2>$0.00</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
 
 
 
@@ -196,7 +274,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js "></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="js/script.js "></script>
+    <script src="js/main.js "></script>
+    <script src="js/cart.js "></script>
 
 </body>
 

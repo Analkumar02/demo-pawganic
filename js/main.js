@@ -77,24 +77,78 @@ $(document).ready(function () {
   /*----------Wishlist Count----------*/
   /*----------Add to wishlist----------*/
 
+  // 🔁 Utility: Get wishlist as array
+  function getWishlist() {
+    try {
+      const raw = JSON.parse(localStorage.getItem("wishlist"));
+      return Array.isArray(raw) ? raw : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // ✅ Utility: Save wishlist to localStorage
+  function saveWishlist(wishlist) {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }
+
+  // 🔄 Update the wishlist count in the header
+  function updateWishlistCount() {
+    const wishlist = getWishlist();
+    const count = wishlist.length;
+    $(".wishlist-count")
+      .text(count)
+      .toggle(count > 0);
+  }
+
+  // ✅ Update .active class on buttons and product-boxes
+  function applyWishlistStatus() {
+    const wishlist = getWishlist();
+
+    $(".add-to-wishlist-btn").each(function () {
+      const $btn = $(this);
+      const id = $btn.data("id");
+      const inWishlist = wishlist.some((item) => item.id === id);
+      $btn.toggleClass("active", inWishlist);
+      $btn.closest(".product-box").toggleClass("active", inWishlist);
+    });
+  }
+
+  // ⭐️ Click event to toggle wishlist
   $(document).on("click", ".add-to-wishlist-btn", function (e) {
     e.preventDefault();
 
-    const id = $(this).data("id");
-    const name = $(this).data("name");
-    const img = $(this).data("img");
-    const price = parseFloat($(this).data("price"));
+    const $btn = $(this);
+    const id = $btn.data("id");
+    const name = $btn.data("name");
+    const price = $btn.data("price");
+    const img = $btn.data("img");
 
     let wishlist = getWishlist();
+    const index = wishlist.findIndex((item) => item.id === id);
 
-    if (!wishlist[id]) {
-      wishlist[id] = { id, name, img, price };
-      saveWishlist(wishlist);
-      updateWishlistCount();
+    if (index > -1) {
+      // REMOVE from wishlist
+      wishlist.splice(index, 1);
+      $btn.removeClass("active");
+      $btn.closest(".product-box").removeClass("active");
     } else {
-      alert("Already in wishlist");
+      // ADD to wishlist
+      wishlist.push({ id, name, price, img });
+      $btn.addClass("active");
+      $btn.closest(".product-box").addClass("active");
     }
+
+    saveWishlist(wishlist);
+    updateWishlistCount();
   });
+
+  // ✅ On page load: sync UI
+  $(document).ready(function () {
+    applyWishlistStatus();
+    updateWishlistCount();
+  });
+
   /*----------Add to wishlist----------*/
 
   /*----------Add to cart----------*/

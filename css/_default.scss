@@ -15,7 +15,7 @@
     --color-gray-3: #f6f6f6;
     --color-gray-4: #F7F4F7;
     --color-gray-5: #EEEEEE;
-    --color-gray-6: #D0DAEF;
+    --color-gray-6: #B9B9B9;
     --color-gray-7: #B4B4B4;
     --color-dark: #111111;
     --color-black-1: #000000;
@@ -273,6 +273,10 @@ p {
     }
 }
 
+thead {
+    border-style: none !important;
+}
+
 
 /*----------Product Box----------*/
 
@@ -319,6 +323,13 @@ p {
                     background-color: var(--theme-secondary);
                     padding: 6px 6px 5px;
                 }
+            }
+        }
+        .active {
+            .bx {
+                color: var(--theme-primary);
+                background-color: var(--theme-secondary);
+                padding: 6px 6px 5px;
             }
         }
     }
@@ -369,7 +380,54 @@ p {
 }
 
 .pr-divider {
-    border-bottom: 2px solid #EEEEEE;
+    border-bottom: 2px solid var(--color-gray-5);
+}
+
+.quantity-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--color-gray-5);
+    border-radius: 40px;
+    padding: 4px;
+    max-width: 165px;
+    width: 100%;
+    .qty-btn {
+        background-color: #f2f2f2;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        font-size: 30px;
+        color: var(--color-black-1);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        transition: background 0.3s;
+        &:hover {
+            background-color: #e0e0e0;
+        }
+        span {
+            margin-bottom: 7px;
+        }
+    }
+    .qty-input {
+        width: 50px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        color: #333;
+        appearance: textfield;
+        line-height: 1;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
 }
 
 @media (max-width: 991px) {

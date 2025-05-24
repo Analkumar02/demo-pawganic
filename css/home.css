@@ -15,7 +15,7 @@
   --color-gray-3: #f6f6f6;
   --color-gray-4: #F7F4F7;
   --color-gray-5: #EEEEEE;
-  --color-gray-6: #D0DAEF;
+  --color-gray-6: #B9B9B9;
   --color-gray-7: #B4B4B4;
   --color-dark: #111111;
   --color-black-1: #000000;
@@ -273,6 +273,10 @@ p {
     transform: rotate(360deg);
   }
 }
+thead {
+  border-style: none !important;
+}
+
 /*----------Product Box----------*/
 .product-box {
   margin-bottom: 20px;
@@ -316,6 +320,11 @@ p {
   transition: 0.4s ease-in-out;
 }
 .product-box .product-img .wishlist-box .bx:hover {
+  color: var(--theme-primary);
+  background-color: var(--theme-secondary);
+  padding: 6px 6px 5px;
+}
+.product-box .product-img .active .bx {
   color: var(--theme-primary);
   background-color: var(--theme-secondary);
   padding: 6px 6px 5px;
@@ -364,7 +373,55 @@ p {
 }
 
 .pr-divider {
-  border-bottom: 2px solid #EEEEEE;
+  border-bottom: 2px solid var(--color-gray-5);
+}
+
+.quantity-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid var(--color-gray-5);
+  border-radius: 40px;
+  padding: 4px;
+  max-width: 165px;
+  width: 100%;
+}
+.quantity-box .qty-btn {
+  background-color: #f2f2f2;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: var(--color-black-1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.3s;
+}
+.quantity-box .qty-btn:hover {
+  background-color: #e0e0e0;
+}
+.quantity-box .qty-btn span {
+  margin-bottom: 7px;
+}
+.quantity-box .qty-input {
+  width: 50px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: #333;
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+  line-height: 1;
+}
+.quantity-box .qty-input::-webkit-outer-spin-button, .quantity-box .qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @media (max-width: 991px) {
