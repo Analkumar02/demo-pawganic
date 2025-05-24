@@ -69,7 +69,7 @@ function renderCart() {
       `<tr>
         <td class="img-cell">
           <a href="product-desc.html?id=${item.id}">
-            <img src="${item.img}" alt="${item.name}">
+            <img src="${item.image}" alt="${item.name}">
           </a>
         </td>
         <td class="title-cell">
